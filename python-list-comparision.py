@@ -6,15 +6,15 @@
 # LastUpdated: 12/01/2018
 ####################################################################################################
 
-def compare_list(lis1, lis2):
+def compare_list(list1, list2):
     '''
-    It will compare two lists
+    It will compare two python lists and return boolean result
     '''
-    if len(lis1) != len(lis2):
+    if len(lis2) != len(lis1):
         return False
-    for val in lis1:
-        if val in lis2:
-            lis2.remove(val)
+    for val in lis2:
+        if val in lis1:
+            lis1.remove(val)
         else:
             return False
     return True
