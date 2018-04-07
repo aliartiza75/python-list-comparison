@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 ###################################################################################################
-# Name: __init__.py
-# Summary: File contains python list comparision code for pypi
+# Name: pylistcompare.pyx
+# Summary: File code for python list comparision
 # Author(s): Irtiza Ali
 # LastUpdated: 08/04/2018
 ####################################################################################################
@@ -18,4 +18,3 @@ def compare_list(list1, list2):
         if val not in list1:
             return False
     return True
-~                     
