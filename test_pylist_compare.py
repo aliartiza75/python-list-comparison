@@ -50,4 +50,3 @@ lis2 = [{1:1,2:2}]
 
 print(compare_list(lis1, lis2))
 
-
