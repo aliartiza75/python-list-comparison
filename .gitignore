@@ -1,0 +1,5 @@
+# Compiled python modules
+*.pyc
+
+# extra folder
+pylistcompare/__pycache__/
