@@ -1,11 +1,11 @@
 #!/usr/bin/python3
 ###################################################################################################
-# Name: test_pylistcompare.py
+# Name: test_listcompare.py
 # Summary: File contains tests for the pylistcompare file
 # Author(s): Irtiza Ali
 # LastUpdated: 08/04/2018
 ####################################################################################################
-import pylistcompare as plc
+import listcompare as plc
 
 # Tests
 lis1 = [1,2,3]

@@ -3,7 +3,7 @@
 /* BEGIN: Cython Metadata
 {
     "distutils": {},
-    "module_name": "pylistcompare.pylistcompare"
+    "module_name": "listcompare.listcompare"
 }
 END: Cython Metadata */
 
@@ -273,8 +273,8 @@ static CYTHON_INLINE float __PYX_NAN() {
   #endif
 #endif
 
-#define __PYX_HAVE__pylistcompare__pylistcompare
-#define __PYX_HAVE_API__pylistcompare__pylistcompare
+#define __PYX_HAVE__listcompare__listcompare
+#define __PYX_HAVE_API__listcompare__listcompare
 #ifdef _OPENMP
 #include <omp.h>
 #endif /* _OPENMP */
@@ -490,7 +490,7 @@ static const char *__pyx_filename;
 
 
 static const char *__pyx_f[] = {
-  "pylistcompare/pylistcompare.pyx",
+  "listcompare/listcompare.pyx",
 };
 
 /*--- Type declarations ---*/
@@ -577,25 +577,6 @@ static CYTHON_INLINE int __Pyx_PySequence_ContainsTF(PyObject* item, PyObject* s
     return unlikely(result < 0) ? result : (result == (eq == Py_EQ));
 }
 
-/* PyObjectGetAttrStr.proto */
-#if CYTHON_COMPILING_IN_CPYTHON
-static CYTHON_INLINE PyObject* __Pyx_PyObject_GetAttrStr(PyObject* obj, PyObject* attr_name) {
-    PyTypeObject* tp = Py_TYPE(obj);
-    if (likely(tp->tp_getattro))
-        return tp->tp_getattro(obj, attr_name);
-#if PY_MAJOR_VERSION < 3
-    if (likely(tp->tp_getattr))
-        return tp->tp_getattr(obj, PyString_AS_STRING(attr_name));
-#endif
-    return PyObject_GetAttr(obj, attr_name);
-}
-#else
-#define __Pyx_PyObject_GetAttrStr(o,n) PyObject_GetAttr(o,n)
-#endif
-
-/* Import.proto */
-static PyObject *__Pyx_Import(PyObject *name, PyObject *from_list, int level);
-
 /* CodeObjectCache.proto */
 typedef struct {
     PyCodeObject* code_object;
@@ -631,37 +612,33 @@ static int __Pyx_check_binary_version(void);
 static int __Pyx_InitStrings(__Pyx_StringTabEntry *t);
 
 
-/* Module declarations from 'pylistcompare.pylistcompare' */
-#define __Pyx_MODULE_NAME "pylistcompare.pylistcompare"
-int __pyx_module_is_main_pylistcompare__pylistcompare = 0;
+/* Module declarations from 'listcompare.listcompare' */
+#define __Pyx_MODULE_NAME "listcompare.listcompare"
+int __pyx_module_is_main_listcompare__listcompare = 0;
 
-/* Implementation of 'pylistcompare.pylistcompare' */
+/* Implementation of 'listcompare.listcompare' */
 static const char __pyx_k_val[] = "val";
-static const char __pyx_k_copy[] = "copy";
 static const char __pyx_k_main[] = "__main__";
 static const char __pyx_k_test[] = "__test__";
 static const char __pyx_k_list1[] = "list1";
 static const char __pyx_k_list2[] = "list2";
-static const char __pyx_k_import[] = "__import__";
 static const char __pyx_k_compare_list[] = "compare_list";
-static const char __pyx_k_pylistcompare_pylistcompare[] = "pylistcompare.pylistcompare";
-static const char __pyx_k_home_flaka_pylistcompare_pylist[] = "/home/flaka/pylistcompare/pylistcompare/pylistcompare.pyx";
+static const char __pyx_k_listcompare_listcompare[] = "listcompare.listcompare";
+static const char __pyx_k_home_flaka_pylistcompare_listco[] = "/home/flaka/pylistcompare/listcompare/listcompare.pyx";
 static PyObject *__pyx_n_s_compare_list;
-static PyObject *__pyx_n_s_copy;
-static PyObject *__pyx_kp_s_home_flaka_pylistcompare_pylist;
-static PyObject *__pyx_n_s_import;
+static PyObject *__pyx_kp_s_home_flaka_pylistcompare_listco;
 static PyObject *__pyx_n_s_list1;
 static PyObject *__pyx_n_s_list2;
+static PyObject *__pyx_n_s_listcompare_listcompare;
 static PyObject *__pyx_n_s_main;
-static PyObject *__pyx_n_s_pylistcompare_pylistcompare;
 static PyObject *__pyx_n_s_test;
 static PyObject *__pyx_n_s_val;
-static PyObject *__pyx_pf_13pylistcompare_13pylistcompare_compare_list(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_list1, PyObject *__pyx_v_list2); /* proto */
+static PyObject *__pyx_pf_11listcompare_11listcompare_compare_list(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_list1, PyObject *__pyx_v_list2); /* proto */
 static PyObject *__pyx_tuple_;
 static PyObject *__pyx_codeobj__2;
 
-/* "pylistcompare/pylistcompare.pyx":11
- * import copy
+/* "listcompare/listcompare.pyx":9
+ * ####################################################################################################
  * 
  * def compare_list(list1, list2):             # <<<<<<<<<<<<<<
  *     '''
@@ -669,10 +646,10 @@ static PyObject *__pyx_codeobj__2;
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_13pylistcompare_13pylistcompare_1compare_list(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_13pylistcompare_13pylistcompare_compare_list[] = "\n    It will compare two python lists and return boolean result\n    ";
-static PyMethodDef __pyx_mdef_13pylistcompare_13pylistcompare_1compare_list = {"compare_list", (PyCFunction)__pyx_pw_13pylistcompare_13pylistcompare_1compare_list, METH_VARARGS|METH_KEYWORDS, __pyx_doc_13pylistcompare_13pylistcompare_compare_list};
-static PyObject *__pyx_pw_13pylistcompare_13pylistcompare_1compare_list(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_11listcompare_11listcompare_1compare_list(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_11listcompare_11listcompare_compare_list[] = "\n    It will compare two python lists and return boolean result\n    ";
+static PyMethodDef __pyx_mdef_11listcompare_11listcompare_1compare_list = {"compare_list", (PyCFunction)__pyx_pw_11listcompare_11listcompare_1compare_list, METH_VARARGS|METH_KEYWORDS, __pyx_doc_11listcompare_11listcompare_compare_list};
+static PyObject *__pyx_pw_11listcompare_11listcompare_1compare_list(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_list1 = 0;
   PyObject *__pyx_v_list2 = 0;
   PyObject *__pyx_r = 0;
@@ -698,11 +675,11 @@ static PyObject *__pyx_pw_13pylistcompare_13pylistcompare_1compare_list(PyObject
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_list2)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("compare_list", 1, 2, 2, 1); __PYX_ERR(0, 11, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("compare_list", 1, 2, 2, 1); __PYX_ERR(0, 9, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "compare_list") < 0)) __PYX_ERR(0, 11, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "compare_list") < 0)) __PYX_ERR(0, 9, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -715,20 +692,20 @@ static PyObject *__pyx_pw_13pylistcompare_13pylistcompare_1compare_list(PyObject
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("compare_list", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 11, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("compare_list", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 9, __pyx_L3_error)
   __pyx_L3_error:;
-  __Pyx_AddTraceback("pylistcompare.pylistcompare.compare_list", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("listcompare.listcompare.compare_list", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_13pylistcompare_13pylistcompare_compare_list(__pyx_self, __pyx_v_list1, __pyx_v_list2);
+  __pyx_r = __pyx_pf_11listcompare_11listcompare_compare_list(__pyx_self, __pyx_v_list1, __pyx_v_list2);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_13pylistcompare_13pylistcompare_compare_list(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_list1, PyObject *__pyx_v_list2) {
+static PyObject *__pyx_pf_11listcompare_11listcompare_compare_list(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_list1, PyObject *__pyx_v_list2) {
   PyObject *__pyx_v_val = NULL;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -741,19 +718,19 @@ static PyObject *__pyx_pf_13pylistcompare_13pylistcompare_compare_list(CYTHON_UN
   int __pyx_t_7;
   __Pyx_RefNannySetupContext("compare_list", 0);
 
-  /* "pylistcompare/pylistcompare.pyx":15
+  /* "listcompare/listcompare.pyx":13
  *     It will compare two python lists and return boolean result
  *     '''
  *     if len(list2) != len(list1):             # <<<<<<<<<<<<<<
  *         return False
  *     for val in list2:
  */
-  __pyx_t_1 = PyObject_Length(__pyx_v_list2); if (unlikely(__pyx_t_1 == -1)) __PYX_ERR(0, 15, __pyx_L1_error)
-  __pyx_t_2 = PyObject_Length(__pyx_v_list1); if (unlikely(__pyx_t_2 == -1)) __PYX_ERR(0, 15, __pyx_L1_error)
+  __pyx_t_1 = PyObject_Length(__pyx_v_list2); if (unlikely(__pyx_t_1 == -1)) __PYX_ERR(0, 13, __pyx_L1_error)
+  __pyx_t_2 = PyObject_Length(__pyx_v_list1); if (unlikely(__pyx_t_2 == -1)) __PYX_ERR(0, 13, __pyx_L1_error)
   __pyx_t_3 = ((__pyx_t_1 != __pyx_t_2) != 0);
   if (__pyx_t_3) {
 
-    /* "pylistcompare/pylistcompare.pyx":16
+    /* "listcompare/listcompare.pyx":14
  *     '''
  *     if len(list2) != len(list1):
  *         return False             # <<<<<<<<<<<<<<
@@ -765,7 +742,7 @@ static PyObject *__pyx_pf_13pylistcompare_13pylistcompare_compare_list(CYTHON_UN
     __pyx_r = Py_False;
     goto __pyx_L0;
 
-    /* "pylistcompare/pylistcompare.pyx":15
+    /* "listcompare/listcompare.pyx":13
  *     It will compare two python lists and return boolean result
  *     '''
  *     if len(list2) != len(list1):             # <<<<<<<<<<<<<<
@@ -774,7 +751,7 @@ static PyObject *__pyx_pf_13pylistcompare_13pylistcompare_compare_list(CYTHON_UN
  */
   }
 
-  /* "pylistcompare/pylistcompare.pyx":17
+  /* "listcompare/listcompare.pyx":15
  *     if len(list2) != len(list1):
  *         return False
  *     for val in list2:             # <<<<<<<<<<<<<<
@@ -785,26 +762,26 @@ static PyObject *__pyx_pf_13pylistcompare_13pylistcompare_compare_list(CYTHON_UN
     __pyx_t_4 = __pyx_v_list2; __Pyx_INCREF(__pyx_t_4); __pyx_t_2 = 0;
     __pyx_t_5 = NULL;
   } else {
-    __pyx_t_2 = -1; __pyx_t_4 = PyObject_GetIter(__pyx_v_list2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 17, __pyx_L1_error)
+    __pyx_t_2 = -1; __pyx_t_4 = PyObject_GetIter(__pyx_v_list2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 15, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_5 = Py_TYPE(__pyx_t_4)->tp_iternext; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 17, __pyx_L1_error)
+    __pyx_t_5 = Py_TYPE(__pyx_t_4)->tp_iternext; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 15, __pyx_L1_error)
   }
   for (;;) {
     if (likely(!__pyx_t_5)) {
       if (likely(PyList_CheckExact(__pyx_t_4))) {
         if (__pyx_t_2 >= PyList_GET_SIZE(__pyx_t_4)) break;
         #if CYTHON_COMPILING_IN_CPYTHON
-        __pyx_t_6 = PyList_GET_ITEM(__pyx_t_4, __pyx_t_2); __Pyx_INCREF(__pyx_t_6); __pyx_t_2++; if (unlikely(0 < 0)) __PYX_ERR(0, 17, __pyx_L1_error)
+        __pyx_t_6 = PyList_GET_ITEM(__pyx_t_4, __pyx_t_2); __Pyx_INCREF(__pyx_t_6); __pyx_t_2++; if (unlikely(0 < 0)) __PYX_ERR(0, 15, __pyx_L1_error)
         #else
-        __pyx_t_6 = PySequence_ITEM(__pyx_t_4, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 17, __pyx_L1_error)
+        __pyx_t_6 = PySequence_ITEM(__pyx_t_4, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 15, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_6);
         #endif
       } else {
         if (__pyx_t_2 >= PyTuple_GET_SIZE(__pyx_t_4)) break;
         #if CYTHON_COMPILING_IN_CPYTHON
-        __pyx_t_6 = PyTuple_GET_ITEM(__pyx_t_4, __pyx_t_2); __Pyx_INCREF(__pyx_t_6); __pyx_t_2++; if (unlikely(0 < 0)) __PYX_ERR(0, 17, __pyx_L1_error)
+        __pyx_t_6 = PyTuple_GET_ITEM(__pyx_t_4, __pyx_t_2); __Pyx_INCREF(__pyx_t_6); __pyx_t_2++; if (unlikely(0 < 0)) __PYX_ERR(0, 15, __pyx_L1_error)
         #else
-        __pyx_t_6 = PySequence_ITEM(__pyx_t_4, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 17, __pyx_L1_error)
+        __pyx_t_6 = PySequence_ITEM(__pyx_t_4, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 15, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_6);
         #endif
       }
@@ -814,7 +791,7 @@ static PyObject *__pyx_pf_13pylistcompare_13pylistcompare_compare_list(CYTHON_UN
         PyObject* exc_type = PyErr_Occurred();
         if (exc_type) {
           if (likely(exc_type == PyExc_StopIteration || PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else __PYX_ERR(0, 17, __pyx_L1_error)
+          else __PYX_ERR(0, 15, __pyx_L1_error)
         }
         break;
       }
@@ -823,18 +800,18 @@ static PyObject *__pyx_pf_13pylistcompare_13pylistcompare_compare_list(CYTHON_UN
     __Pyx_XDECREF_SET(__pyx_v_val, __pyx_t_6);
     __pyx_t_6 = 0;
 
-    /* "pylistcompare/pylistcompare.pyx":18
+    /* "listcompare/listcompare.pyx":16
  *         return False
  *     for val in list2:
  *         if val not in list1:             # <<<<<<<<<<<<<<
  *             return False
  *     return True
  */
-    __pyx_t_3 = (__Pyx_PySequence_ContainsTF(__pyx_v_val, __pyx_v_list1, Py_NE)); if (unlikely(__pyx_t_3 < 0)) __PYX_ERR(0, 18, __pyx_L1_error)
+    __pyx_t_3 = (__Pyx_PySequence_ContainsTF(__pyx_v_val, __pyx_v_list1, Py_NE)); if (unlikely(__pyx_t_3 < 0)) __PYX_ERR(0, 16, __pyx_L1_error)
     __pyx_t_7 = (__pyx_t_3 != 0);
     if (__pyx_t_7) {
 
-      /* "pylistcompare/pylistcompare.pyx":19
+      /* "listcompare/listcompare.pyx":17
  *     for val in list2:
  *         if val not in list1:
  *             return False             # <<<<<<<<<<<<<<
@@ -846,7 +823,7 @@ static PyObject *__pyx_pf_13pylistcompare_13pylistcompare_compare_list(CYTHON_UN
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
       goto __pyx_L0;
 
-      /* "pylistcompare/pylistcompare.pyx":18
+      /* "listcompare/listcompare.pyx":16
  *         return False
  *     for val in list2:
  *         if val not in list1:             # <<<<<<<<<<<<<<
@@ -855,7 +832,7 @@ static PyObject *__pyx_pf_13pylistcompare_13pylistcompare_compare_list(CYTHON_UN
  */
     }
 
-    /* "pylistcompare/pylistcompare.pyx":17
+    /* "listcompare/listcompare.pyx":15
  *     if len(list2) != len(list1):
  *         return False
  *     for val in list2:             # <<<<<<<<<<<<<<
@@ -865,7 +842,7 @@ static PyObject *__pyx_pf_13pylistcompare_13pylistcompare_compare_list(CYTHON_UN
   }
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "pylistcompare/pylistcompare.pyx":20
+  /* "listcompare/listcompare.pyx":18
  *         if val not in list1:
  *             return False
  *     return True             # <<<<<<<<<<<<<<
@@ -875,8 +852,8 @@ static PyObject *__pyx_pf_13pylistcompare_13pylistcompare_compare_list(CYTHON_UN
   __pyx_r = Py_True;
   goto __pyx_L0;
 
-  /* "pylistcompare/pylistcompare.pyx":11
- * import copy
+  /* "listcompare/listcompare.pyx":9
+ * ####################################################################################################
  * 
  * def compare_list(list1, list2):             # <<<<<<<<<<<<<<
  *     '''
@@ -887,7 +864,7 @@ static PyObject *__pyx_pf_13pylistcompare_13pylistcompare_compare_list(CYTHON_UN
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_4);
   __Pyx_XDECREF(__pyx_t_6);
-  __Pyx_AddTraceback("pylistcompare.pylistcompare.compare_list", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("listcompare.listcompare.compare_list", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_val);
@@ -907,7 +884,7 @@ static struct PyModuleDef __pyx_moduledef = {
   #else
     PyModuleDef_HEAD_INIT,
   #endif
-    "pylistcompare",
+    "listcompare",
     0, /* m_doc */
     -1, /* m_size */
     __pyx_methods /* m_methods */,
@@ -920,13 +897,11 @@ static struct PyModuleDef __pyx_moduledef = {
 
 static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_compare_list, __pyx_k_compare_list, sizeof(__pyx_k_compare_list), 0, 0, 1, 1},
-  {&__pyx_n_s_copy, __pyx_k_copy, sizeof(__pyx_k_copy), 0, 0, 1, 1},
-  {&__pyx_kp_s_home_flaka_pylistcompare_pylist, __pyx_k_home_flaka_pylistcompare_pylist, sizeof(__pyx_k_home_flaka_pylistcompare_pylist), 0, 0, 1, 0},
-  {&__pyx_n_s_import, __pyx_k_import, sizeof(__pyx_k_import), 0, 0, 1, 1},
+  {&__pyx_kp_s_home_flaka_pylistcompare_listco, __pyx_k_home_flaka_pylistcompare_listco, sizeof(__pyx_k_home_flaka_pylistcompare_listco), 0, 0, 1, 0},
   {&__pyx_n_s_list1, __pyx_k_list1, sizeof(__pyx_k_list1), 0, 0, 1, 1},
   {&__pyx_n_s_list2, __pyx_k_list2, sizeof(__pyx_k_list2), 0, 0, 1, 1},
+  {&__pyx_n_s_listcompare_listcompare, __pyx_k_listcompare_listcompare, sizeof(__pyx_k_listcompare_listcompare), 0, 0, 1, 1},
   {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
-  {&__pyx_n_s_pylistcompare_pylistcompare, __pyx_k_pylistcompare_pylistcompare, sizeof(__pyx_k_pylistcompare_pylistcompare), 0, 0, 1, 1},
   {&__pyx_n_s_test, __pyx_k_test, sizeof(__pyx_k_test), 0, 0, 1, 1},
   {&__pyx_n_s_val, __pyx_k_val, sizeof(__pyx_k_val), 0, 0, 1, 1},
   {0, 0, 0, 0, 0, 0, 0}
@@ -939,17 +914,17 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "pylistcompare/pylistcompare.pyx":11
- * import copy
+  /* "listcompare/listcompare.pyx":9
+ * ####################################################################################################
  * 
  * def compare_list(list1, list2):             # <<<<<<<<<<<<<<
  *     '''
  *     It will compare two python lists and return boolean result
  */
-  __pyx_tuple_ = PyTuple_Pack(3, __pyx_n_s_list1, __pyx_n_s_list2, __pyx_n_s_val); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 11, __pyx_L1_error)
+  __pyx_tuple_ = PyTuple_Pack(3, __pyx_n_s_list1, __pyx_n_s_list2, __pyx_n_s_val); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 9, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple_);
   __Pyx_GIVEREF(__pyx_tuple_);
-  __pyx_codeobj__2 = (PyObject*)__Pyx_PyCode_New(2, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple_, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_flaka_pylistcompare_pylist, __pyx_n_s_compare_list, 11, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__2)) __PYX_ERR(0, 11, __pyx_L1_error)
+  __pyx_codeobj__2 = (PyObject*)__Pyx_PyCode_New(2, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple_, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_flaka_pylistcompare_listco, __pyx_n_s_compare_list, 9, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__2)) __PYX_ERR(0, 9, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -965,11 +940,11 @@ static int __Pyx_InitGlobals(void) {
 }
 
 #if PY_MAJOR_VERSION < 3
-PyMODINIT_FUNC initpylistcompare(void); /*proto*/
-PyMODINIT_FUNC initpylistcompare(void)
+PyMODINIT_FUNC initlistcompare(void); /*proto*/
+PyMODINIT_FUNC initlistcompare(void)
 #else
-PyMODINIT_FUNC PyInit_pylistcompare(void); /*proto*/
-PyMODINIT_FUNC PyInit_pylistcompare(void)
+PyMODINIT_FUNC PyInit_listcompare(void); /*proto*/
+PyMODINIT_FUNC PyInit_listcompare(void)
 #endif
 {
   PyObject *__pyx_t_1 = NULL;
@@ -983,7 +958,7 @@ PyMODINIT_FUNC PyInit_pylistcompare(void)
           Py_FatalError("failed to import 'refnanny' module");
   }
   #endif
-  __Pyx_RefNannySetupContext("PyMODINIT_FUNC PyInit_pylistcompare(void)", 0);
+  __Pyx_RefNannySetupContext("PyMODINIT_FUNC PyInit_listcompare(void)", 0);
   if (__Pyx_check_binary_version() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   __pyx_empty_tuple = PyTuple_New(0); if (unlikely(!__pyx_empty_tuple)) __PYX_ERR(0, 1, __pyx_L1_error)
   __pyx_empty_bytes = PyBytes_FromStringAndSize("", 0); if (unlikely(!__pyx_empty_bytes)) __PYX_ERR(0, 1, __pyx_L1_error)
@@ -1012,7 +987,7 @@ PyMODINIT_FUNC PyInit_pylistcompare(void)
   #endif
   /*--- Module creation code ---*/
   #if PY_MAJOR_VERSION < 3
-  __pyx_m = Py_InitModule4("pylistcompare", __pyx_methods, 0, 0, PYTHON_API_VERSION); Py_XINCREF(__pyx_m);
+  __pyx_m = Py_InitModule4("listcompare", __pyx_methods, 0, 0, PYTHON_API_VERSION); Py_XINCREF(__pyx_m);
   #else
   __pyx_m = PyModule_Create(&__pyx_moduledef);
   #endif
@@ -1029,14 +1004,14 @@ PyMODINIT_FUNC PyInit_pylistcompare(void)
   #if PY_MAJOR_VERSION < 3 && (__PYX_DEFAULT_STRING_ENCODING_IS_ASCII || __PYX_DEFAULT_STRING_ENCODING_IS_DEFAULT)
   if (__Pyx_init_sys_getdefaultencoding_params() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
-  if (__pyx_module_is_main_pylistcompare__pylistcompare) {
+  if (__pyx_module_is_main_listcompare__listcompare) {
     if (PyObject_SetAttrString(__pyx_m, "__name__", __pyx_n_s_main) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   }
   #if PY_MAJOR_VERSION >= 3
   {
     PyObject *modules = PyImport_GetModuleDict(); if (unlikely(!modules)) __PYX_ERR(0, 1, __pyx_L1_error)
-    if (!PyDict_GetItemString(modules, "pylistcompare.pylistcompare")) {
-      if (unlikely(PyDict_SetItemString(modules, "pylistcompare.pylistcompare", __pyx_m) < 0)) __PYX_ERR(0, 1, __pyx_L1_error)
+    if (!PyDict_GetItemString(modules, "listcompare.listcompare")) {
+      if (unlikely(PyDict_SetItemString(modules, "listcompare.listcompare", __pyx_m) < 0)) __PYX_ERR(0, 1, __pyx_L1_error)
     }
   }
   #endif
@@ -1056,34 +1031,22 @@ PyMODINIT_FUNC PyInit_pylistcompare(void)
   if (__Pyx_patch_abc() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
 
-  /* "pylistcompare/pylistcompare.pyx":9
+  /* "listcompare/listcompare.pyx":9
  * ####################################################################################################
- * 
- * import copy             # <<<<<<<<<<<<<<
- * 
- * def compare_list(list1, list2):
- */
-  __pyx_t_1 = __Pyx_Import(__pyx_n_s_copy, 0, -1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 9, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_copy, __pyx_t_1) < 0) __PYX_ERR(0, 9, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-
-  /* "pylistcompare/pylistcompare.pyx":11
- * import copy
  * 
  * def compare_list(list1, list2):             # <<<<<<<<<<<<<<
  *     '''
  *     It will compare two python lists and return boolean result
  */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_13pylistcompare_13pylistcompare_1compare_list, NULL, __pyx_n_s_pylistcompare_pylistcompare); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 11, __pyx_L1_error)
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_11listcompare_11listcompare_1compare_list, NULL, __pyx_n_s_listcompare_listcompare); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 9, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_compare_list, __pyx_t_1) < 0) __PYX_ERR(0, 11, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_compare_list, __pyx_t_1) < 0) __PYX_ERR(0, 9, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "pylistcompare/pylistcompare.pyx":1
+  /* "listcompare/listcompare.pyx":1
  * #!/usr/bin/python3             # <<<<<<<<<<<<<<
  * ###################################################################################################
- * # Name: python-list-comparision.py
+ * # Name: listcompare.pyx
  */
   __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -1097,11 +1060,11 @@ PyMODINIT_FUNC PyInit_pylistcompare(void)
   __Pyx_XDECREF(__pyx_t_1);
   if (__pyx_m) {
     if (__pyx_d) {
-      __Pyx_AddTraceback("init pylistcompare.pylistcompare", __pyx_clineno, __pyx_lineno, __pyx_filename);
+      __Pyx_AddTraceback("init listcompare.listcompare", __pyx_clineno, __pyx_lineno, __pyx_filename);
     }
     Py_DECREF(__pyx_m); __pyx_m = 0;
   } else if (!PyErr_Occurred()) {
-    PyErr_SetString(PyExc_ImportError, "init pylistcompare.pylistcompare");
+    PyErr_SetString(PyExc_ImportError, "init listcompare.listcompare");
   }
   __pyx_L0:;
   __Pyx_RefNannyFinishContext();
@@ -1270,80 +1233,6 @@ invalid_keyword:
     #endif
 bad:
     return -1;
-}
-
-/* Import */
-static PyObject *__Pyx_Import(PyObject *name, PyObject *from_list, int level) {
-    PyObject *empty_list = 0;
-    PyObject *module = 0;
-    PyObject *global_dict = 0;
-    PyObject *empty_dict = 0;
-    PyObject *list;
-    #if PY_VERSION_HEX < 0x03030000
-    PyObject *py_import;
-    py_import = __Pyx_PyObject_GetAttrStr(__pyx_b, __pyx_n_s_import);
-    if (!py_import)
-        goto bad;
-    #endif
-    if (from_list)
-        list = from_list;
-    else {
-        empty_list = PyList_New(0);
-        if (!empty_list)
-            goto bad;
-        list = empty_list;
-    }
-    global_dict = PyModule_GetDict(__pyx_m);
-    if (!global_dict)
-        goto bad;
-    empty_dict = PyDict_New();
-    if (!empty_dict)
-        goto bad;
-    {
-        #if PY_MAJOR_VERSION >= 3
-        if (level == -1) {
-            if (strchr(__Pyx_MODULE_NAME, '.')) {
-                #if PY_VERSION_HEX < 0x03030000
-                PyObject *py_level = PyInt_FromLong(1);
-                if (!py_level)
-                    goto bad;
-                module = PyObject_CallFunctionObjArgs(py_import,
-                    name, global_dict, empty_dict, list, py_level, NULL);
-                Py_DECREF(py_level);
-                #else
-                module = PyImport_ImportModuleLevelObject(
-                    name, global_dict, empty_dict, list, 1);
-                #endif
-                if (!module) {
-                    if (!PyErr_ExceptionMatches(PyExc_ImportError))
-                        goto bad;
-                    PyErr_Clear();
-                }
-            }
-            level = 0;
-        }
-        #endif
-        if (!module) {
-            #if PY_VERSION_HEX < 0x03030000
-            PyObject *py_level = PyInt_FromLong(level);
-            if (!py_level)
-                goto bad;
-            module = PyObject_CallFunctionObjArgs(py_import,
-                name, global_dict, empty_dict, list, py_level, NULL);
-            Py_DECREF(py_level);
-            #else
-            module = PyImport_ImportModuleLevelObject(
-                name, global_dict, empty_dict, list, level);
-            #endif
-        }
-    }
-bad:
-    #if PY_VERSION_HEX < 0x03030000
-    Py_XDECREF(py_import);
-    #endif
-    Py_XDECREF(empty_list);
-    Py_XDECREF(empty_dict);
-    return module;
 }
 
 /* CodeObjectCache */

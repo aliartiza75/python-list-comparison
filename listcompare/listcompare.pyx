@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 ###################################################################################################
-# Name: pylistcompare.pyx
+# Name: listcompare.pyx
 # Summary: File code for python list comparision
 # Author(s): Irtiza Ali
 # LastUpdated: 08/04/2018
