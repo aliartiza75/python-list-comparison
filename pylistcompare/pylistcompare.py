@@ -6,8 +6,6 @@
 # LastUpdated: 08/04/2018
 ####################################################################################################
 
-import copy
-
 def compare_list(list1, list2):
     '''
     It will compare two python lists and return boolean result

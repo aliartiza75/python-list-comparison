@@ -3,3 +3,5 @@
 
 # extra folder
 pylistcompare/__pycache__/
+pylistcompare/build/
+pylistcompare/pylistcompare/
