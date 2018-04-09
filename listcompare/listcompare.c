@@ -709,148 +709,178 @@ static PyObject *__pyx_pf_11listcompare_11listcompare_compare_list(CYTHON_UNUSED
   PyObject *__pyx_v_val = NULL;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
-  Py_ssize_t __pyx_t_1;
-  Py_ssize_t __pyx_t_2;
+  int __pyx_t_1;
+  int __pyx_t_2;
   int __pyx_t_3;
-  PyObject *__pyx_t_4 = NULL;
-  PyObject *(*__pyx_t_5)(PyObject *);
+  Py_ssize_t __pyx_t_4;
+  Py_ssize_t __pyx_t_5;
   PyObject *__pyx_t_6 = NULL;
-  int __pyx_t_7;
+  PyObject *(*__pyx_t_7)(PyObject *);
+  PyObject *__pyx_t_8 = NULL;
   __Pyx_RefNannySetupContext("compare_list", 0);
 
   /* "listcompare/listcompare.pyx":13
  *     It will compare two python lists and return boolean result
  *     '''
- *     if len(list2) != len(list1):             # <<<<<<<<<<<<<<
- *         return False
- *     for val in list2:
+ *     if isinstance(list1, list) and isinstance(list2, list):             # <<<<<<<<<<<<<<
+ *         if len(list2) != len(list1):
+ *             return False
  */
-  __pyx_t_1 = PyObject_Length(__pyx_v_list2); if (unlikely(__pyx_t_1 == -1)) __PYX_ERR(0, 13, __pyx_L1_error)
-  __pyx_t_2 = PyObject_Length(__pyx_v_list1); if (unlikely(__pyx_t_2 == -1)) __PYX_ERR(0, 13, __pyx_L1_error)
-  __pyx_t_3 = ((__pyx_t_1 != __pyx_t_2) != 0);
+  __pyx_t_2 = PyList_Check(__pyx_v_list1); 
+  __pyx_t_3 = (__pyx_t_2 != 0);
   if (__pyx_t_3) {
+  } else {
+    __pyx_t_1 = __pyx_t_3;
+    goto __pyx_L4_bool_binop_done;
+  }
+  __pyx_t_3 = PyList_Check(__pyx_v_list2); 
+  __pyx_t_2 = (__pyx_t_3 != 0);
+  __pyx_t_1 = __pyx_t_2;
+  __pyx_L4_bool_binop_done:;
+  if (__pyx_t_1) {
 
     /* "listcompare/listcompare.pyx":14
  *     '''
- *     if len(list2) != len(list1):
- *         return False             # <<<<<<<<<<<<<<
- *     for val in list2:
- *         if val not in list1:
+ *     if isinstance(list1, list) and isinstance(list2, list):
+ *         if len(list2) != len(list1):             # <<<<<<<<<<<<<<
+ *             return False
+ *         for val in list2:
+ */
+    __pyx_t_4 = PyObject_Length(__pyx_v_list2); if (unlikely(__pyx_t_4 == -1)) __PYX_ERR(0, 14, __pyx_L1_error)
+    __pyx_t_5 = PyObject_Length(__pyx_v_list1); if (unlikely(__pyx_t_5 == -1)) __PYX_ERR(0, 14, __pyx_L1_error)
+    __pyx_t_1 = ((__pyx_t_4 != __pyx_t_5) != 0);
+    if (__pyx_t_1) {
+
+      /* "listcompare/listcompare.pyx":15
+ *     if isinstance(list1, list) and isinstance(list2, list):
+ *         if len(list2) != len(list1):
+ *             return False             # <<<<<<<<<<<<<<
+ *         for val in list2:
+ *             if val not in list1:
+ */
+      __Pyx_XDECREF(__pyx_r);
+      __Pyx_INCREF(Py_False);
+      __pyx_r = Py_False;
+      goto __pyx_L0;
+
+      /* "listcompare/listcompare.pyx":14
+ *     '''
+ *     if isinstance(list1, list) and isinstance(list2, list):
+ *         if len(list2) != len(list1):             # <<<<<<<<<<<<<<
+ *             return False
+ *         for val in list2:
+ */
+    }
+
+    /* "listcompare/listcompare.pyx":16
+ *         if len(list2) != len(list1):
+ *             return False
+ *         for val in list2:             # <<<<<<<<<<<<<<
+ *             if val not in list1:
+ *                 return False
+ */
+    if (likely(PyList_CheckExact(__pyx_v_list2)) || PyTuple_CheckExact(__pyx_v_list2)) {
+      __pyx_t_6 = __pyx_v_list2; __Pyx_INCREF(__pyx_t_6); __pyx_t_5 = 0;
+      __pyx_t_7 = NULL;
+    } else {
+      __pyx_t_5 = -1; __pyx_t_6 = PyObject_GetIter(__pyx_v_list2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 16, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_6);
+      __pyx_t_7 = Py_TYPE(__pyx_t_6)->tp_iternext; if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 16, __pyx_L1_error)
+    }
+    for (;;) {
+      if (likely(!__pyx_t_7)) {
+        if (likely(PyList_CheckExact(__pyx_t_6))) {
+          if (__pyx_t_5 >= PyList_GET_SIZE(__pyx_t_6)) break;
+          #if CYTHON_COMPILING_IN_CPYTHON
+          __pyx_t_8 = PyList_GET_ITEM(__pyx_t_6, __pyx_t_5); __Pyx_INCREF(__pyx_t_8); __pyx_t_5++; if (unlikely(0 < 0)) __PYX_ERR(0, 16, __pyx_L1_error)
+          #else
+          __pyx_t_8 = PySequence_ITEM(__pyx_t_6, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 16, __pyx_L1_error)
+          __Pyx_GOTREF(__pyx_t_8);
+          #endif
+        } else {
+          if (__pyx_t_5 >= PyTuple_GET_SIZE(__pyx_t_6)) break;
+          #if CYTHON_COMPILING_IN_CPYTHON
+          __pyx_t_8 = PyTuple_GET_ITEM(__pyx_t_6, __pyx_t_5); __Pyx_INCREF(__pyx_t_8); __pyx_t_5++; if (unlikely(0 < 0)) __PYX_ERR(0, 16, __pyx_L1_error)
+          #else
+          __pyx_t_8 = PySequence_ITEM(__pyx_t_6, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 16, __pyx_L1_error)
+          __Pyx_GOTREF(__pyx_t_8);
+          #endif
+        }
+      } else {
+        __pyx_t_8 = __pyx_t_7(__pyx_t_6);
+        if (unlikely(!__pyx_t_8)) {
+          PyObject* exc_type = PyErr_Occurred();
+          if (exc_type) {
+            if (likely(exc_type == PyExc_StopIteration || PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
+            else __PYX_ERR(0, 16, __pyx_L1_error)
+          }
+          break;
+        }
+        __Pyx_GOTREF(__pyx_t_8);
+      }
+      __Pyx_XDECREF_SET(__pyx_v_val, __pyx_t_8);
+      __pyx_t_8 = 0;
+
+      /* "listcompare/listcompare.pyx":17
+ *             return False
+ *         for val in list2:
+ *             if val not in list1:             # <<<<<<<<<<<<<<
+ *                 return False
+ *         return True
+ */
+      __pyx_t_1 = (__Pyx_PySequence_ContainsTF(__pyx_v_val, __pyx_v_list1, Py_NE)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 17, __pyx_L1_error)
+      __pyx_t_2 = (__pyx_t_1 != 0);
+      if (__pyx_t_2) {
+
+        /* "listcompare/listcompare.pyx":18
+ *         for val in list2:
+ *             if val not in list1:
+ *                 return False             # <<<<<<<<<<<<<<
+ *         return True
+ */
+        __Pyx_XDECREF(__pyx_r);
+        __Pyx_INCREF(Py_False);
+        __pyx_r = Py_False;
+        __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+        goto __pyx_L0;
+
+        /* "listcompare/listcompare.pyx":17
+ *             return False
+ *         for val in list2:
+ *             if val not in list1:             # <<<<<<<<<<<<<<
+ *                 return False
+ *         return True
+ */
+      }
+
+      /* "listcompare/listcompare.pyx":16
+ *         if len(list2) != len(list1):
+ *             return False
+ *         for val in list2:             # <<<<<<<<<<<<<<
+ *             if val not in list1:
+ *                 return False
+ */
+    }
+    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+
+    /* "listcompare/listcompare.pyx":19
+ *             if val not in list1:
+ *                 return False
+ *         return True             # <<<<<<<<<<<<<<
  */
     __Pyx_XDECREF(__pyx_r);
-    __Pyx_INCREF(Py_False);
-    __pyx_r = Py_False;
+    __Pyx_INCREF(Py_True);
+    __pyx_r = Py_True;
     goto __pyx_L0;
 
     /* "listcompare/listcompare.pyx":13
  *     It will compare two python lists and return boolean result
  *     '''
- *     if len(list2) != len(list1):             # <<<<<<<<<<<<<<
- *         return False
- *     for val in list2:
- */
-  }
-
-  /* "listcompare/listcompare.pyx":15
- *     if len(list2) != len(list1):
- *         return False
- *     for val in list2:             # <<<<<<<<<<<<<<
- *         if val not in list1:
- *             return False
- */
-  if (likely(PyList_CheckExact(__pyx_v_list2)) || PyTuple_CheckExact(__pyx_v_list2)) {
-    __pyx_t_4 = __pyx_v_list2; __Pyx_INCREF(__pyx_t_4); __pyx_t_2 = 0;
-    __pyx_t_5 = NULL;
-  } else {
-    __pyx_t_2 = -1; __pyx_t_4 = PyObject_GetIter(__pyx_v_list2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 15, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_5 = Py_TYPE(__pyx_t_4)->tp_iternext; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 15, __pyx_L1_error)
-  }
-  for (;;) {
-    if (likely(!__pyx_t_5)) {
-      if (likely(PyList_CheckExact(__pyx_t_4))) {
-        if (__pyx_t_2 >= PyList_GET_SIZE(__pyx_t_4)) break;
-        #if CYTHON_COMPILING_IN_CPYTHON
-        __pyx_t_6 = PyList_GET_ITEM(__pyx_t_4, __pyx_t_2); __Pyx_INCREF(__pyx_t_6); __pyx_t_2++; if (unlikely(0 < 0)) __PYX_ERR(0, 15, __pyx_L1_error)
-        #else
-        __pyx_t_6 = PySequence_ITEM(__pyx_t_4, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 15, __pyx_L1_error)
-        __Pyx_GOTREF(__pyx_t_6);
-        #endif
-      } else {
-        if (__pyx_t_2 >= PyTuple_GET_SIZE(__pyx_t_4)) break;
-        #if CYTHON_COMPILING_IN_CPYTHON
-        __pyx_t_6 = PyTuple_GET_ITEM(__pyx_t_4, __pyx_t_2); __Pyx_INCREF(__pyx_t_6); __pyx_t_2++; if (unlikely(0 < 0)) __PYX_ERR(0, 15, __pyx_L1_error)
-        #else
-        __pyx_t_6 = PySequence_ITEM(__pyx_t_4, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 15, __pyx_L1_error)
-        __Pyx_GOTREF(__pyx_t_6);
-        #endif
-      }
-    } else {
-      __pyx_t_6 = __pyx_t_5(__pyx_t_4);
-      if (unlikely(!__pyx_t_6)) {
-        PyObject* exc_type = PyErr_Occurred();
-        if (exc_type) {
-          if (likely(exc_type == PyExc_StopIteration || PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else __PYX_ERR(0, 15, __pyx_L1_error)
-        }
-        break;
-      }
-      __Pyx_GOTREF(__pyx_t_6);
-    }
-    __Pyx_XDECREF_SET(__pyx_v_val, __pyx_t_6);
-    __pyx_t_6 = 0;
-
-    /* "listcompare/listcompare.pyx":16
- *         return False
- *     for val in list2:
- *         if val not in list1:             # <<<<<<<<<<<<<<
- *             return False
- *     return True
- */
-    __pyx_t_3 = (__Pyx_PySequence_ContainsTF(__pyx_v_val, __pyx_v_list1, Py_NE)); if (unlikely(__pyx_t_3 < 0)) __PYX_ERR(0, 16, __pyx_L1_error)
-    __pyx_t_7 = (__pyx_t_3 != 0);
-    if (__pyx_t_7) {
-
-      /* "listcompare/listcompare.pyx":17
- *     for val in list2:
- *         if val not in list1:
- *             return False             # <<<<<<<<<<<<<<
- *     return True
- */
-      __Pyx_XDECREF(__pyx_r);
-      __Pyx_INCREF(Py_False);
-      __pyx_r = Py_False;
-      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-      goto __pyx_L0;
-
-      /* "listcompare/listcompare.pyx":16
- *         return False
- *     for val in list2:
- *         if val not in list1:             # <<<<<<<<<<<<<<
- *             return False
- *     return True
- */
-    }
-
-    /* "listcompare/listcompare.pyx":15
- *     if len(list2) != len(list1):
- *         return False
- *     for val in list2:             # <<<<<<<<<<<<<<
- *         if val not in list1:
+ *     if isinstance(list1, list) and isinstance(list2, list):             # <<<<<<<<<<<<<<
+ *         if len(list2) != len(list1):
  *             return False
  */
   }
-  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-
-  /* "listcompare/listcompare.pyx":18
- *         if val not in list1:
- *             return False
- *     return True             # <<<<<<<<<<<<<<
- */
-  __Pyx_XDECREF(__pyx_r);
-  __Pyx_INCREF(Py_True);
-  __pyx_r = Py_True;
-  goto __pyx_L0;
 
   /* "listcompare/listcompare.pyx":9
  * ####################################################################################################
@@ -861,9 +891,11 @@ static PyObject *__pyx_pf_11listcompare_11listcompare_compare_list(CYTHON_UNUSED
  */
 
   /* function exit code */
+  __pyx_r = Py_None; __Pyx_INCREF(Py_None);
+  goto __pyx_L0;
   __pyx_L1_error:;
-  __Pyx_XDECREF(__pyx_t_4);
   __Pyx_XDECREF(__pyx_t_6);
+  __Pyx_XDECREF(__pyx_t_8);
   __Pyx_AddTraceback("listcompare.listcompare.compare_list", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;

@@ -1,11 +1,12 @@
 from setuptools import setup
 
 setup(name='listcompare',
-      version='1.1.1',
+      version='1.1.3',
       url='https://github.com/aliartiza75/python-list-comparison.git',
       author='Irtiza Ali',
       description="This module provides support to compare two lists that have same or different types of data in it.",
-      long_description="This module provides support to compare two lists that have same or different types of data in it.",
+      long_description="This module provides support to compare two lists that have same or different types of data in it."+
+                       "Examples",
       author_email='aliartiza75@yahoo.com',
       license='GNU GENERAL PUBLIC LICENSE',
       classifiers=[  
