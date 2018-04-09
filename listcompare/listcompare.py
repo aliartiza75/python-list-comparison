@@ -19,4 +19,5 @@ def compare_list(list1, list2):
             if val not in list1:
                 return False
         return True
+    raise Exception("Invalid Data provided")
 

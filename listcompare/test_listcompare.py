@@ -34,4 +34,8 @@ lis2 = [{1:1,2:2}]
 
 print(plc.compare_list(lis1, lis2))
 
+lis1 = {}
+lis2 = 1
+
+print(plc.compare_list(lis1, lis2))
 

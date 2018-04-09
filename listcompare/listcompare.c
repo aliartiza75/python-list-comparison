@@ -559,6 +559,25 @@ static const char *__pyx_f[] = {
 #define __Pyx_CLEAR(r)    do { PyObject* tmp = ((PyObject*)(r)); r = NULL; __Pyx_DECREF(tmp);} while(0)
 #define __Pyx_XCLEAR(r)   do { if((r) != NULL) {PyObject* tmp = ((PyObject*)(r)); r = NULL; __Pyx_DECREF(tmp);}} while(0)
 
+/* PyObjectGetAttrStr.proto */
+#if CYTHON_COMPILING_IN_CPYTHON
+static CYTHON_INLINE PyObject* __Pyx_PyObject_GetAttrStr(PyObject* obj, PyObject* attr_name) {
+    PyTypeObject* tp = Py_TYPE(obj);
+    if (likely(tp->tp_getattro))
+        return tp->tp_getattro(obj, attr_name);
+#if PY_MAJOR_VERSION < 3
+    if (likely(tp->tp_getattr))
+        return tp->tp_getattr(obj, PyString_AS_STRING(attr_name));
+#endif
+    return PyObject_GetAttr(obj, attr_name);
+}
+#else
+#define __Pyx_PyObject_GetAttrStr(o,n) PyObject_GetAttr(o,n)
+#endif
+
+/* GetBuiltinName.proto */
+static PyObject *__Pyx_GetBuiltinName(PyObject *name);
+
 /* RaiseArgTupleInvalid.proto */
 static void __Pyx_RaiseArgtupleInvalid(const char* func_name, int exact,
     Py_ssize_t num_min, Py_ssize_t num_max, Py_ssize_t num_found);
@@ -576,6 +595,40 @@ static CYTHON_INLINE int __Pyx_PySequence_ContainsTF(PyObject* item, PyObject* s
     int result = PySequence_Contains(seq, item);
     return unlikely(result < 0) ? result : (result == (eq == Py_EQ));
 }
+
+/* PyObjectCall.proto */
+#if CYTHON_COMPILING_IN_CPYTHON
+static CYTHON_INLINE PyObject* __Pyx_PyObject_Call(PyObject *func, PyObject *arg, PyObject *kw);
+#else
+#define __Pyx_PyObject_Call(func, arg, kw) PyObject_Call(func, arg, kw)
+#endif
+
+/* PyThreadStateGet.proto */
+#if CYTHON_COMPILING_IN_CPYTHON
+#define __Pyx_PyThreadState_declare  PyThreadState *__pyx_tstate;
+#define __Pyx_PyThreadState_assign  __pyx_tstate = PyThreadState_GET();
+#else
+#define __Pyx_PyThreadState_declare
+#define __Pyx_PyThreadState_assign
+#endif
+
+/* PyErrFetchRestore.proto */
+#if CYTHON_COMPILING_IN_CPYTHON
+#define __Pyx_ErrRestoreWithState(type, value, tb)  __Pyx_ErrRestoreInState(PyThreadState_GET(), type, value, tb)
+#define __Pyx_ErrFetchWithState(type, value, tb)    __Pyx_ErrFetchInState(PyThreadState_GET(), type, value, tb)
+#define __Pyx_ErrRestore(type, value, tb)  __Pyx_ErrRestoreInState(__pyx_tstate, type, value, tb)
+#define __Pyx_ErrFetch(type, value, tb)    __Pyx_ErrFetchInState(__pyx_tstate, type, value, tb)
+static CYTHON_INLINE void __Pyx_ErrRestoreInState(PyThreadState *tstate, PyObject *type, PyObject *value, PyObject *tb);
+static CYTHON_INLINE void __Pyx_ErrFetchInState(PyThreadState *tstate, PyObject **type, PyObject **value, PyObject **tb);
+#else
+#define __Pyx_ErrRestoreWithState(type, value, tb)  PyErr_Restore(type, value, tb)
+#define __Pyx_ErrFetchWithState(type, value, tb)  PyErr_Fetch(type, value, tb)
+#define __Pyx_ErrRestore(type, value, tb)  PyErr_Restore(type, value, tb)
+#define __Pyx_ErrFetch(type, value, tb)  PyErr_Fetch(type, value, tb)
+#endif
+
+/* RaiseException.proto */
+static void __Pyx_Raise(PyObject *type, PyObject *value, PyObject *tb, PyObject *cause);
 
 /* CodeObjectCache.proto */
 typedef struct {
@@ -617,14 +670,19 @@ static int __Pyx_InitStrings(__Pyx_StringTabEntry *t);
 int __pyx_module_is_main_listcompare__listcompare = 0;
 
 /* Implementation of 'listcompare.listcompare' */
+static PyObject *__pyx_builtin_Exception;
 static const char __pyx_k_val[] = "val";
 static const char __pyx_k_main[] = "__main__";
 static const char __pyx_k_test[] = "__test__";
 static const char __pyx_k_list1[] = "list1";
 static const char __pyx_k_list2[] = "list2";
+static const char __pyx_k_Exception[] = "Exception";
 static const char __pyx_k_compare_list[] = "compare_list";
+static const char __pyx_k_Invalid_Data_provided[] = "Invalid Data provided";
 static const char __pyx_k_listcompare_listcompare[] = "listcompare.listcompare";
 static const char __pyx_k_home_flaka_pylistcompare_listco[] = "/home/flaka/pylistcompare/listcompare/listcompare.pyx";
+static PyObject *__pyx_n_s_Exception;
+static PyObject *__pyx_kp_s_Invalid_Data_provided;
 static PyObject *__pyx_n_s_compare_list;
 static PyObject *__pyx_kp_s_home_flaka_pylistcompare_listco;
 static PyObject *__pyx_n_s_list1;
@@ -635,7 +693,8 @@ static PyObject *__pyx_n_s_test;
 static PyObject *__pyx_n_s_val;
 static PyObject *__pyx_pf_11listcompare_11listcompare_compare_list(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_list1, PyObject *__pyx_v_list2); /* proto */
 static PyObject *__pyx_tuple_;
-static PyObject *__pyx_codeobj__2;
+static PyObject *__pyx_tuple__2;
+static PyObject *__pyx_codeobj__3;
 
 /* "listcompare/listcompare.pyx":9
  * ####################################################################################################
@@ -719,12 +778,12 @@ static PyObject *__pyx_pf_11listcompare_11listcompare_compare_list(CYTHON_UNUSED
   PyObject *__pyx_t_8 = NULL;
   __Pyx_RefNannySetupContext("compare_list", 0);
 
-  /* "listcompare/listcompare.pyx":13
- *     It will compare two python lists and return boolean result
+  /* "listcompare/listcompare.pyx":14
  *     '''
+ * 
  *     if isinstance(list1, list) and isinstance(list2, list):             # <<<<<<<<<<<<<<
+ * 
  *         if len(list2) != len(list1):
- *             return False
  */
   __pyx_t_2 = PyList_Check(__pyx_v_list1); 
   __pyx_t_3 = (__pyx_t_2 != 0);
@@ -739,20 +798,20 @@ static PyObject *__pyx_pf_11listcompare_11listcompare_compare_list(CYTHON_UNUSED
   __pyx_L4_bool_binop_done:;
   if (__pyx_t_1) {
 
-    /* "listcompare/listcompare.pyx":14
- *     '''
+    /* "listcompare/listcompare.pyx":16
  *     if isinstance(list1, list) and isinstance(list2, list):
+ * 
  *         if len(list2) != len(list1):             # <<<<<<<<<<<<<<
  *             return False
  *         for val in list2:
  */
-    __pyx_t_4 = PyObject_Length(__pyx_v_list2); if (unlikely(__pyx_t_4 == -1)) __PYX_ERR(0, 14, __pyx_L1_error)
-    __pyx_t_5 = PyObject_Length(__pyx_v_list1); if (unlikely(__pyx_t_5 == -1)) __PYX_ERR(0, 14, __pyx_L1_error)
+    __pyx_t_4 = PyObject_Length(__pyx_v_list2); if (unlikely(__pyx_t_4 == -1)) __PYX_ERR(0, 16, __pyx_L1_error)
+    __pyx_t_5 = PyObject_Length(__pyx_v_list1); if (unlikely(__pyx_t_5 == -1)) __PYX_ERR(0, 16, __pyx_L1_error)
     __pyx_t_1 = ((__pyx_t_4 != __pyx_t_5) != 0);
     if (__pyx_t_1) {
 
-      /* "listcompare/listcompare.pyx":15
- *     if isinstance(list1, list) and isinstance(list2, list):
+      /* "listcompare/listcompare.pyx":17
+ * 
  *         if len(list2) != len(list1):
  *             return False             # <<<<<<<<<<<<<<
  *         for val in list2:
@@ -763,16 +822,16 @@ static PyObject *__pyx_pf_11listcompare_11listcompare_compare_list(CYTHON_UNUSED
       __pyx_r = Py_False;
       goto __pyx_L0;
 
-      /* "listcompare/listcompare.pyx":14
- *     '''
+      /* "listcompare/listcompare.pyx":16
  *     if isinstance(list1, list) and isinstance(list2, list):
+ * 
  *         if len(list2) != len(list1):             # <<<<<<<<<<<<<<
  *             return False
  *         for val in list2:
  */
     }
 
-    /* "listcompare/listcompare.pyx":16
+    /* "listcompare/listcompare.pyx":18
  *         if len(list2) != len(list1):
  *             return False
  *         for val in list2:             # <<<<<<<<<<<<<<
@@ -783,26 +842,26 @@ static PyObject *__pyx_pf_11listcompare_11listcompare_compare_list(CYTHON_UNUSED
       __pyx_t_6 = __pyx_v_list2; __Pyx_INCREF(__pyx_t_6); __pyx_t_5 = 0;
       __pyx_t_7 = NULL;
     } else {
-      __pyx_t_5 = -1; __pyx_t_6 = PyObject_GetIter(__pyx_v_list2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 16, __pyx_L1_error)
+      __pyx_t_5 = -1; __pyx_t_6 = PyObject_GetIter(__pyx_v_list2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 18, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
-      __pyx_t_7 = Py_TYPE(__pyx_t_6)->tp_iternext; if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 16, __pyx_L1_error)
+      __pyx_t_7 = Py_TYPE(__pyx_t_6)->tp_iternext; if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 18, __pyx_L1_error)
     }
     for (;;) {
       if (likely(!__pyx_t_7)) {
         if (likely(PyList_CheckExact(__pyx_t_6))) {
           if (__pyx_t_5 >= PyList_GET_SIZE(__pyx_t_6)) break;
           #if CYTHON_COMPILING_IN_CPYTHON
-          __pyx_t_8 = PyList_GET_ITEM(__pyx_t_6, __pyx_t_5); __Pyx_INCREF(__pyx_t_8); __pyx_t_5++; if (unlikely(0 < 0)) __PYX_ERR(0, 16, __pyx_L1_error)
+          __pyx_t_8 = PyList_GET_ITEM(__pyx_t_6, __pyx_t_5); __Pyx_INCREF(__pyx_t_8); __pyx_t_5++; if (unlikely(0 < 0)) __PYX_ERR(0, 18, __pyx_L1_error)
           #else
-          __pyx_t_8 = PySequence_ITEM(__pyx_t_6, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 16, __pyx_L1_error)
+          __pyx_t_8 = PySequence_ITEM(__pyx_t_6, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 18, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_8);
           #endif
         } else {
           if (__pyx_t_5 >= PyTuple_GET_SIZE(__pyx_t_6)) break;
           #if CYTHON_COMPILING_IN_CPYTHON
-          __pyx_t_8 = PyTuple_GET_ITEM(__pyx_t_6, __pyx_t_5); __Pyx_INCREF(__pyx_t_8); __pyx_t_5++; if (unlikely(0 < 0)) __PYX_ERR(0, 16, __pyx_L1_error)
+          __pyx_t_8 = PyTuple_GET_ITEM(__pyx_t_6, __pyx_t_5); __Pyx_INCREF(__pyx_t_8); __pyx_t_5++; if (unlikely(0 < 0)) __PYX_ERR(0, 18, __pyx_L1_error)
           #else
-          __pyx_t_8 = PySequence_ITEM(__pyx_t_6, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 16, __pyx_L1_error)
+          __pyx_t_8 = PySequence_ITEM(__pyx_t_6, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 18, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_8);
           #endif
         }
@@ -812,7 +871,7 @@ static PyObject *__pyx_pf_11listcompare_11listcompare_compare_list(CYTHON_UNUSED
           PyObject* exc_type = PyErr_Occurred();
           if (exc_type) {
             if (likely(exc_type == PyExc_StopIteration || PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-            else __PYX_ERR(0, 16, __pyx_L1_error)
+            else __PYX_ERR(0, 18, __pyx_L1_error)
           }
           break;
         }
@@ -821,22 +880,23 @@ static PyObject *__pyx_pf_11listcompare_11listcompare_compare_list(CYTHON_UNUSED
       __Pyx_XDECREF_SET(__pyx_v_val, __pyx_t_8);
       __pyx_t_8 = 0;
 
-      /* "listcompare/listcompare.pyx":17
+      /* "listcompare/listcompare.pyx":19
  *             return False
  *         for val in list2:
  *             if val not in list1:             # <<<<<<<<<<<<<<
  *                 return False
  *         return True
  */
-      __pyx_t_1 = (__Pyx_PySequence_ContainsTF(__pyx_v_val, __pyx_v_list1, Py_NE)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 17, __pyx_L1_error)
+      __pyx_t_1 = (__Pyx_PySequence_ContainsTF(__pyx_v_val, __pyx_v_list1, Py_NE)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 19, __pyx_L1_error)
       __pyx_t_2 = (__pyx_t_1 != 0);
       if (__pyx_t_2) {
 
-        /* "listcompare/listcompare.pyx":18
+        /* "listcompare/listcompare.pyx":20
  *         for val in list2:
  *             if val not in list1:
  *                 return False             # <<<<<<<<<<<<<<
  *         return True
+ *     raise Exception("Invalid Data provided")
  */
         __Pyx_XDECREF(__pyx_r);
         __Pyx_INCREF(Py_False);
@@ -844,7 +904,7 @@ static PyObject *__pyx_pf_11listcompare_11listcompare_compare_list(CYTHON_UNUSED
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
         goto __pyx_L0;
 
-        /* "listcompare/listcompare.pyx":17
+        /* "listcompare/listcompare.pyx":19
  *             return False
  *         for val in list2:
  *             if val not in list1:             # <<<<<<<<<<<<<<
@@ -853,7 +913,7 @@ static PyObject *__pyx_pf_11listcompare_11listcompare_compare_list(CYTHON_UNUSED
  */
       }
 
-      /* "listcompare/listcompare.pyx":16
+      /* "listcompare/listcompare.pyx":18
  *         if len(list2) != len(list1):
  *             return False
  *         for val in list2:             # <<<<<<<<<<<<<<
@@ -863,24 +923,38 @@ static PyObject *__pyx_pf_11listcompare_11listcompare_compare_list(CYTHON_UNUSED
     }
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-    /* "listcompare/listcompare.pyx":19
+    /* "listcompare/listcompare.pyx":21
  *             if val not in list1:
  *                 return False
  *         return True             # <<<<<<<<<<<<<<
+ *     raise Exception("Invalid Data provided")
+ * 
  */
     __Pyx_XDECREF(__pyx_r);
     __Pyx_INCREF(Py_True);
     __pyx_r = Py_True;
     goto __pyx_L0;
 
-    /* "listcompare/listcompare.pyx":13
- *     It will compare two python lists and return boolean result
+    /* "listcompare/listcompare.pyx":14
  *     '''
+ * 
  *     if isinstance(list1, list) and isinstance(list2, list):             # <<<<<<<<<<<<<<
+ * 
  *         if len(list2) != len(list1):
- *             return False
  */
   }
+
+  /* "listcompare/listcompare.pyx":22
+ *                 return False
+ *         return True
+ *     raise Exception("Invalid Data provided")             # <<<<<<<<<<<<<<
+ * 
+ */
+  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_builtin_Exception, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 22, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  __Pyx_Raise(__pyx_t_6, 0, 0, 0);
+  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+  __PYX_ERR(0, 22, __pyx_L1_error)
 
   /* "listcompare/listcompare.pyx":9
  * ####################################################################################################
@@ -891,8 +965,6 @@ static PyObject *__pyx_pf_11listcompare_11listcompare_compare_list(CYTHON_UNUSED
  */
 
   /* function exit code */
-  __pyx_r = Py_None; __Pyx_INCREF(Py_None);
-  goto __pyx_L0;
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_6);
   __Pyx_XDECREF(__pyx_t_8);
@@ -928,6 +1000,8 @@ static struct PyModuleDef __pyx_moduledef = {
 #endif
 
 static __Pyx_StringTabEntry __pyx_string_tab[] = {
+  {&__pyx_n_s_Exception, __pyx_k_Exception, sizeof(__pyx_k_Exception), 0, 0, 1, 1},
+  {&__pyx_kp_s_Invalid_Data_provided, __pyx_k_Invalid_Data_provided, sizeof(__pyx_k_Invalid_Data_provided), 0, 0, 1, 0},
   {&__pyx_n_s_compare_list, __pyx_k_compare_list, sizeof(__pyx_k_compare_list), 0, 0, 1, 1},
   {&__pyx_kp_s_home_flaka_pylistcompare_listco, __pyx_k_home_flaka_pylistcompare_listco, sizeof(__pyx_k_home_flaka_pylistcompare_listco), 0, 0, 1, 0},
   {&__pyx_n_s_list1, __pyx_k_list1, sizeof(__pyx_k_list1), 0, 0, 1, 1},
@@ -939,12 +1013,25 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {0, 0, 0, 0, 0, 0, 0}
 };
 static int __Pyx_InitCachedBuiltins(void) {
+  __pyx_builtin_Exception = __Pyx_GetBuiltinName(__pyx_n_s_Exception); if (!__pyx_builtin_Exception) __PYX_ERR(0, 22, __pyx_L1_error)
   return 0;
+  __pyx_L1_error:;
+  return -1;
 }
 
 static int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
+
+  /* "listcompare/listcompare.pyx":22
+ *                 return False
+ *         return True
+ *     raise Exception("Invalid Data provided")             # <<<<<<<<<<<<<<
+ * 
+ */
+  __pyx_tuple_ = PyTuple_Pack(1, __pyx_kp_s_Invalid_Data_provided); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 22, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple_);
+  __Pyx_GIVEREF(__pyx_tuple_);
 
   /* "listcompare/listcompare.pyx":9
  * ####################################################################################################
@@ -953,10 +1040,10 @@ static int __Pyx_InitCachedConstants(void) {
  *     '''
  *     It will compare two python lists and return boolean result
  */
-  __pyx_tuple_ = PyTuple_Pack(3, __pyx_n_s_list1, __pyx_n_s_list2, __pyx_n_s_val); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 9, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple_);
-  __Pyx_GIVEREF(__pyx_tuple_);
-  __pyx_codeobj__2 = (PyObject*)__Pyx_PyCode_New(2, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple_, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_flaka_pylistcompare_listco, __pyx_n_s_compare_list, 9, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__2)) __PYX_ERR(0, 9, __pyx_L1_error)
+  __pyx_tuple__2 = PyTuple_Pack(3, __pyx_n_s_list1, __pyx_n_s_list2, __pyx_n_s_val); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 9, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__2);
+  __Pyx_GIVEREF(__pyx_tuple__2);
+  __pyx_codeobj__3 = (PyObject*)__Pyx_PyCode_New(2, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__2, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_flaka_pylistcompare_listco, __pyx_n_s_compare_list, 9, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__3)) __PYX_ERR(0, 9, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -1125,6 +1212,20 @@ end:
 }
 #endif
 
+/* GetBuiltinName */
+static PyObject *__Pyx_GetBuiltinName(PyObject *name) {
+    PyObject* result = __Pyx_PyObject_GetAttrStr(__pyx_b, name);
+    if (unlikely(!result)) {
+        PyErr_Format(PyExc_NameError,
+#if PY_MAJOR_VERSION >= 3
+            "name '%U' is not defined", name);
+#else
+            "name '%.200s' is not defined", PyString_AS_STRING(name));
+#endif
+    }
+    return result;
+}
+
 /* RaiseArgTupleInvalid */
 static void __Pyx_RaiseArgtupleInvalid(
     const char* func_name,
@@ -1267,8 +1368,215 @@ bad:
     return -1;
 }
 
+/* PyObjectCall */
+#if CYTHON_COMPILING_IN_CPYTHON
+static CYTHON_INLINE PyObject* __Pyx_PyObject_Call(PyObject *func, PyObject *arg, PyObject *kw) {
+    PyObject *result;
+    ternaryfunc call = func->ob_type->tp_call;
+    if (unlikely(!call))
+        return PyObject_Call(func, arg, kw);
+    if (unlikely(Py_EnterRecursiveCall((char*)" while calling a Python object")))
+        return NULL;
+    result = (*call)(func, arg, kw);
+    Py_LeaveRecursiveCall();
+    if (unlikely(!result) && unlikely(!PyErr_Occurred())) {
+        PyErr_SetString(
+            PyExc_SystemError,
+            "NULL result without error in PyObject_Call");
+    }
+    return result;
+}
+#endif
+
+/* PyErrFetchRestore */
+#if CYTHON_COMPILING_IN_CPYTHON
+static CYTHON_INLINE void __Pyx_ErrRestoreInState(PyThreadState *tstate, PyObject *type, PyObject *value, PyObject *tb) {
+    PyObject *tmp_type, *tmp_value, *tmp_tb;
+    tmp_type = tstate->curexc_type;
+    tmp_value = tstate->curexc_value;
+    tmp_tb = tstate->curexc_traceback;
+    tstate->curexc_type = type;
+    tstate->curexc_value = value;
+    tstate->curexc_traceback = tb;
+    Py_XDECREF(tmp_type);
+    Py_XDECREF(tmp_value);
+    Py_XDECREF(tmp_tb);
+}
+static CYTHON_INLINE void __Pyx_ErrFetchInState(PyThreadState *tstate, PyObject **type, PyObject **value, PyObject **tb) {
+    *type = tstate->curexc_type;
+    *value = tstate->curexc_value;
+    *tb = tstate->curexc_traceback;
+    tstate->curexc_type = 0;
+    tstate->curexc_value = 0;
+    tstate->curexc_traceback = 0;
+}
+#endif
+
+/* RaiseException */
+#if PY_MAJOR_VERSION < 3
+static void __Pyx_Raise(PyObject *type, PyObject *value, PyObject *tb,
+                        CYTHON_UNUSED PyObject *cause) {
+    __Pyx_PyThreadState_declare
+    Py_XINCREF(type);
+    if (!value || value == Py_None)
+        value = NULL;
+    else
+        Py_INCREF(value);
+    if (!tb || tb == Py_None)
+        tb = NULL;
+    else {
+        Py_INCREF(tb);
+        if (!PyTraceBack_Check(tb)) {
+            PyErr_SetString(PyExc_TypeError,
+                "raise: arg 3 must be a traceback or None");
+            goto raise_error;
+        }
+    }
+    if (PyType_Check(type)) {
+#if CYTHON_COMPILING_IN_PYPY
+        if (!value) {
+            Py_INCREF(Py_None);
+            value = Py_None;
+        }
+#endif
+        PyErr_NormalizeException(&type, &value, &tb);
+    } else {
+        if (value) {
+            PyErr_SetString(PyExc_TypeError,
+                "instance exception may not have a separate value");
+            goto raise_error;
+        }
+        value = type;
+        type = (PyObject*) Py_TYPE(type);
+        Py_INCREF(type);
+        if (!PyType_IsSubtype((PyTypeObject *)type, (PyTypeObject *)PyExc_BaseException)) {
+            PyErr_SetString(PyExc_TypeError,
+                "raise: exception class must be a subclass of BaseException");
+            goto raise_error;
+        }
+    }
+    __Pyx_PyThreadState_assign
+    __Pyx_ErrRestore(type, value, tb);
+    return;
+raise_error:
+    Py_XDECREF(value);
+    Py_XDECREF(type);
+    Py_XDECREF(tb);
+    return;
+}
+#else
+static void __Pyx_Raise(PyObject *type, PyObject *value, PyObject *tb, PyObject *cause) {
+    PyObject* owned_instance = NULL;
+    if (tb == Py_None) {
+        tb = 0;
+    } else if (tb && !PyTraceBack_Check(tb)) {
+        PyErr_SetString(PyExc_TypeError,
+            "raise: arg 3 must be a traceback or None");
+        goto bad;
+    }
+    if (value == Py_None)
+        value = 0;
+    if (PyExceptionInstance_Check(type)) {
+        if (value) {
+            PyErr_SetString(PyExc_TypeError,
+                "instance exception may not have a separate value");
+            goto bad;
+        }
+        value = type;
+        type = (PyObject*) Py_TYPE(value);
+    } else if (PyExceptionClass_Check(type)) {
+        PyObject *instance_class = NULL;
+        if (value && PyExceptionInstance_Check(value)) {
+            instance_class = (PyObject*) Py_TYPE(value);
+            if (instance_class != type) {
+                int is_subclass = PyObject_IsSubclass(instance_class, type);
+                if (!is_subclass) {
+                    instance_class = NULL;
+                } else if (unlikely(is_subclass == -1)) {
+                    goto bad;
+                } else {
+                    type = instance_class;
+                }
+            }
+        }
+        if (!instance_class) {
+            PyObject *args;
+            if (!value)
+                args = PyTuple_New(0);
+            else if (PyTuple_Check(value)) {
+                Py_INCREF(value);
+                args = value;
+            } else
+                args = PyTuple_Pack(1, value);
+            if (!args)
+                goto bad;
+            owned_instance = PyObject_Call(type, args, NULL);
+            Py_DECREF(args);
+            if (!owned_instance)
+                goto bad;
+            value = owned_instance;
+            if (!PyExceptionInstance_Check(value)) {
+                PyErr_Format(PyExc_TypeError,
+                             "calling %R should have returned an instance of "
+                             "BaseException, not %R",
+                             type, Py_TYPE(value));
+                goto bad;
+            }
+        }
+    } else {
+        PyErr_SetString(PyExc_TypeError,
+            "raise: exception class must be a subclass of BaseException");
+        goto bad;
+    }
+#if PY_VERSION_HEX >= 0x03030000
+    if (cause) {
+#else
+    if (cause && cause != Py_None) {
+#endif
+        PyObject *fixed_cause;
+        if (cause == Py_None) {
+            fixed_cause = NULL;
+        } else if (PyExceptionClass_Check(cause)) {
+            fixed_cause = PyObject_CallObject(cause, NULL);
+            if (fixed_cause == NULL)
+                goto bad;
+        } else if (PyExceptionInstance_Check(cause)) {
+            fixed_cause = cause;
+            Py_INCREF(fixed_cause);
+        } else {
+            PyErr_SetString(PyExc_TypeError,
+                            "exception causes must derive from "
+                            "BaseException");
+            goto bad;
+        }
+        PyException_SetCause(value, fixed_cause);
+    }
+    PyErr_SetObject(type, value);
+    if (tb) {
+#if CYTHON_COMPILING_IN_PYPY
+        PyObject *tmp_type, *tmp_value, *tmp_tb;
+        PyErr_Fetch(&tmp_type, &tmp_value, &tmp_tb);
+        Py_INCREF(tb);
+        PyErr_Restore(tmp_type, tmp_value, tb);
+        Py_XDECREF(tmp_tb);
+#else
+        PyThreadState *tstate = PyThreadState_GET();
+        PyObject* tmp_tb = tstate->curexc_traceback;
+        if (tb != tmp_tb) {
+            Py_INCREF(tb);
+            tstate->curexc_traceback = tb;
+            Py_XDECREF(tmp_tb);
+        }
+#endif
+    }
+bad:
+    Py_XDECREF(owned_instance);
+    return;
+}
+#endif
+
 /* CodeObjectCache */
-static int __pyx_bisect_code_objects(__Pyx_CodeObjectCacheEntry* entries, int count, int code_line) {
+  static int __pyx_bisect_code_objects(__Pyx_CodeObjectCacheEntry* entries, int count, int code_line) {
     int start = 0, mid = 0, end = count - 1;
     if (end >= 0 && code_line > entries[end].code_line) {
         return count;
@@ -1348,7 +1656,7 @@ static void __pyx_insert_code_object(int code_line, PyCodeObject* code_object) {
 }
 
 /* AddTraceback */
-#include "compile.h"
+  #include "compile.h"
 #include "frameobject.h"
 #include "traceback.h"
 static PyCodeObject* __Pyx_CreateCodeObjectForTraceback(
@@ -1429,7 +1737,7 @@ bad:
 }
 
 /* CIntToPy */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value) {
+  static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value) {
     const long neg_one = (long) -1, const_zero = (long) 0;
     const int is_unsigned = neg_one > const_zero;
     if (is_unsigned) {
@@ -1456,7 +1764,7 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value) {
 }
 
 /* CIntFromPyVerify */
-#define __PYX_VERIFY_RETURN_INT(target_type, func_type, func_value)\
+  #define __PYX_VERIFY_RETURN_INT(target_type, func_type, func_value)\
     __PYX__VERIFY_RETURN_INT(target_type, func_type, func_value, 0)
 #define __PYX_VERIFY_RETURN_INT_EXC(target_type, func_type, func_value)\
     __PYX__VERIFY_RETURN_INT(target_type, func_type, func_value, 1)
@@ -1478,7 +1786,7 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value) {
     }
 
 /* CIntFromPy */
-static CYTHON_INLINE long __Pyx_PyInt_As_long(PyObject *x) {
+  static CYTHON_INLINE long __Pyx_PyInt_As_long(PyObject *x) {
     const long neg_one = (long) -1, const_zero = (long) 0;
     const int is_unsigned = neg_one > const_zero;
 #if PY_MAJOR_VERSION < 3
@@ -1663,7 +1971,7 @@ raise_neg_overflow:
 }
 
 /* CIntFromPy */
-static CYTHON_INLINE int __Pyx_PyInt_As_int(PyObject *x) {
+  static CYTHON_INLINE int __Pyx_PyInt_As_int(PyObject *x) {
     const int neg_one = (int) -1, const_zero = (int) 0;
     const int is_unsigned = neg_one > const_zero;
 #if PY_MAJOR_VERSION < 3
@@ -1848,7 +2156,7 @@ raise_neg_overflow:
 }
 
 /* CheckBinaryVersion */
-static int __Pyx_check_binary_version(void) {
+  static int __Pyx_check_binary_version(void) {
     char ctversion[4], rtversion[4];
     PyOS_snprintf(ctversion, 4, "%d.%d", PY_MAJOR_VERSION, PY_MINOR_VERSION);
     PyOS_snprintf(rtversion, 4, "%s", Py_GetVersion());
@@ -1864,7 +2172,7 @@ static int __Pyx_check_binary_version(void) {
 }
 
 /* InitStrings */
-static int __Pyx_InitStrings(__Pyx_StringTabEntry *t) {
+  static int __Pyx_InitStrings(__Pyx_StringTabEntry *t) {
     while (t->p) {
         #if PY_MAJOR_VERSION < 3
         if (t->is_unicode) {
