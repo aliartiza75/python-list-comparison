@@ -66,4 +66,5 @@ $ python setup.py build_ext --inplace
 
 ## Project distribution page of pypi
 
-Link to the pypi module [page](https://pypi.org/project/listcompare/).
+Link to the pypi module [page](https://pypi.org/project/listcompare/)
+Link to module webpage [page](https://aliartiza75.github.io/python-list-comparison/)
