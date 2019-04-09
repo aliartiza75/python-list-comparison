@@ -1,0 +1,2 @@
+pycodestyle *.py
+pycodestyle */*.py

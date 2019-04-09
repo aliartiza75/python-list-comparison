@@ -8,34 +8,36 @@
 import listcompare as plc
 
 # Tests
-lis1 = [1,2,3]
-lis2 = [2,1]
+lis1 = [1, 2, 3]
+lis2 = [2, 1]
 
 print(plc.compare_list(lis1, lis2))
 
-lis1 = [1,2,3]
-lis2 = [2,1,"3"]
+lis1 = [1, 2, 3]
+lis2 = [2, 1, "3"]
 
 print(plc.compare_list(lis1, lis2))
 
-lis1 = ['1','2','3']
-lis2 = ['2','1']
+lis1 = ['1', '2', '3']
+lis2 = ['2', '1']
 
 print(plc.compare_list(lis1, lis2))
 
 
-lis1 = [1,2,3]
-lis2 = [2,1,3]
+lis1 = [1, 2, 3]
+lis2 = [2, 1, 3]
 
 print(plc.compare_list(lis1, lis2))
 
-lis1 = [{1:1,2:2}]
-lis2 = [{1:1,2:2}]
+lis1 = [{1: 1, 2: 2}]
+lis2 = [{1: 1, 2: 2}]
 
 print(plc.compare_list(lis1, lis2))
 
 lis1 = {}
 lis2 = 1
 
-print(plc.compare_list(lis1, lis2))
-
+try:
+    print(plc.compare_list(lis1, lis2))
+except Exception as e:
+    print("Invalid data provided")

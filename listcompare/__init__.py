@@ -3,8 +3,9 @@
 # Name: __init__.py
 # Summary: File contains python list comparision code for pypi
 # Author(s): Irtiza Ali
-# LastUpdated: 10/04/2018
+# LastUpdated: 09/04/2019
 ####################################################################################################
+
 
 def compare_list(list1, list2):
     '''
@@ -15,8 +16,13 @@ def compare_list(list1, list2):
 
         if len(list2) != len(list1):
             return False
-        for val in list2:
-            if val not in list1:
+        # check item of list2 exists in list1
+        for list2_item in list2:
+            if list2_item not in list1:
+                return False
+        # check item of list1 exists in list2
+        for list1_item in list1:
+            if list1_item not in list2:
                 return False
         return True
-    raise Exception("Invalid Data provided")                
+    raise Exception("Invalid Data provided")
