@@ -29,7 +29,12 @@ setup(name='listcompare',
 
                        "lis1 = 123 \n" +
                        "lis2 = [{1: 1, 2: 2}] \n" +
-                       "plc.compare_list(lis1, lis2) # Exception will be raised \n",
+                       "plc.compare_list(lis1, lis2) # Exception will be raised \n"
+
+                       "lis1 = [1, 'a', {1: 1, 2: 2}, 3] \n" +
+                       "lis2 = [3, 1, {1: 1, 2: 2}, 'a']] \n" +
+                       "plc.compare_list(lis1, lis2) # True \n",
+
       author_email='aliartiza75@yahoo.com',
       license='GNU GENERAL PUBLIC LICENSE',
       classifiers=[
