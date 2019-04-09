@@ -60,10 +60,10 @@ Sometime twine can publish the distribution because of authentication issue but 
 
 ## Guidelines for cythonizing the project
 ```bash
-$ cd pythonlistcompare
+$ cd listcompare
 $ python setup.py build_ext --inplace 
 ```
 
-# Project distribution page of pypi
+## Project distribution page of pypi
 
 Link to the pypi module [page](https://pypi.org/project/listcompare/).
