@@ -6,10 +6,5 @@ jobs:
     steps:
       - run: git clone https://github.com/aliartiza75/python-list-comparison.git 
       - run: cd python-list-comparison
-      - run: ls
-      - run: cd python-list-comparison
-      - run: pwd
-      - run: ls
-      - run: pip3 install -r python-list-comparison/requirements.txt
-      - run: cd listcompare
-      - run: python3 test_listcompare.py
+      - run: sudo pip3 install -r python-list-comparison/requirements.txt
+      - run: python3 python-list-comparison/listcompare/test_listcompare.py
