@@ -5,5 +5,7 @@ jobs:
       - image: circleci/python:3.6.4
     steps:
       - run: git clone https://github.com/aliartiza75/python-list-comparison.git 
-      - run: ls
-      - run: pwd
+      - run: cd python-list-comparison
+      - run: pip3 install -r requirements.txt
+      - run: cd listcompare
+      - run: python3 test_listcompare.py
