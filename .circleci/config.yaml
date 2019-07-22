@@ -1,0 +1,11 @@
+version: 2
+
+jobs:
+  build:
+    working_directory: ~/c
+    docker:
+    - image: circleci/python:3.6.4
+    steps:
+    - run:
+      command: |
+        python3 -V
