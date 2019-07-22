@@ -4,6 +4,6 @@ jobs:
     docker:
       - image: circleci/python:3.6.4
     steps:
-      - checkout      
+      - run: git clone https://github.com/aliartiza75/python-list-comparison.git 
       - run: ls
       - run: pwd
