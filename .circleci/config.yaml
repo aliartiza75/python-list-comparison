@@ -1,11 +1,8 @@
 version: 2
-
 jobs:
   build:
-    working_directory: ~/c
     docker:
-    - image: circleci/python:3.6.4
+      - image: circleci/ruby:2.4.1
     steps:
-    - run:
-      command: |
-        python3 -V
+      - checkout
+      - run: echo "A first hello"
