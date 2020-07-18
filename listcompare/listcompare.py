@@ -20,9 +20,5 @@ def compare_list(list1, list2):
         for list2_item in list2:
             if list2_item not in list1:
                 return False
-        # check item of list1 exists in list2
-        for list1_item in list1:
-            if list1_item not in list2:
-                return False
         return True
     raise Exception("Invalid Data provided")
