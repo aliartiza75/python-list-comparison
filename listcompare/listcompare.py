@@ -26,7 +26,7 @@ def compare_list(list1, list2):
 
 def parse_nested_list(list1):
     '''
-    It will parse the nest list and store the data in a dictionary.
+    It will parse the nested list and store the data in a dictionary.
 
     Example:
 
@@ -55,5 +55,8 @@ def parse_nested_list(list1):
     }
 
     '''
-    parsed_list = []
+    # dict holds the information regarding the nest list
+    parsed_list_dict = {}
+
+
     return parsed_list
