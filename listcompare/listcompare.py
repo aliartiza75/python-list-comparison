@@ -58,5 +58,4 @@ def parse_nested_list(list1):
     # dict holds the information regarding the nest list
     parsed_list_dict = {}
 
-
     return parsed_list
