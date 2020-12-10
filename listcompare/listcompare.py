@@ -22,3 +22,40 @@ def compare_list(list1, list2):
                 return False
         return True
     raise Exception("Invalid Data provided")
+
+
+def parse_nested_list(list1):
+    '''
+    It will parse the nested list and store the data in a dictionary.
+
+    Example:
+
+    l1 =  [1, 2, "a", {"key": "value"}, ["a", "b", 1], (1, 2)]
+
+    dict1 = {
+        "int": {
+            "1": [1, 2],
+            "2"" [1]
+        },
+
+        "str": {
+            "1": ["a"]
+            "2": ["a", "b"]
+        },
+
+
+        "tuple": {
+           "1": [(1, 2)]
+
+        },
+
+        "dict": {
+          "1": [{"key": "value"}]
+        }
+    }
+
+    '''
+    # dict holds the information regarding the nest list
+    parsed_list_dict = {}
+
+    return parsed_list
