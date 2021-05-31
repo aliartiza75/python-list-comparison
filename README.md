@@ -1,7 +1,11 @@
 [![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-white.svg)](https://sonarcloud.io/dashboard?id=aliartiza75_python-list-comparison)
 [![CircleCI](https://circleci.com/gh/aliartiza75/python-list-comparison.svg?style=svg)](https://circleci.com/gh/aliartiza75/python-list-comparison)
-
-
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=aliartiza75_python-list-comparison&metric=bugs)](https://sonarcloud.io/dashboard?id=aliartiza75_python-list-comparison)
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=aliartiza75_python-list-comparison&metric=ncloc)](https://sonarcloud.io/dashboard?id=aliartiza75_python-list-comparison)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=aliartiza75_python-list-comparison&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=aliartiza75_python-list-comparison)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=aliartiza75_python-list-comparison&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=aliartiza75_python-list-comparison)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=aliartiza75_python-list-comparison&metric=security_rating)](https://sonarcloud.io/dashboard?id=aliartiza75_python-list-comparison)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=aliartiza75_python-list-comparison&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=aliartiza75_python-list-comparison)
 # pylistcompare
 
 A module to compare two lists that complex data in it.
